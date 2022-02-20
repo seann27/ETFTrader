@@ -1,9 +1,9 @@
-import asyncio, time, telegram_send, traceback, sys
-from kucoin.client import WsToken
-from kucoin.ws_client import KucoinWsClient
+# import asyncio, time, telegram_send, traceback, sys
+# from kucoin.client import WsToken
+# from kucoin.ws_client import KucoinWsClient
 from MongoDBHandle import CryptoDB
 from datetime import datetime
-import concurrent.futures
+# import concurrent.futures
 from utilities import try_request
 from math import ceil
 from UpsideMomemtum import get_kucoin_data
