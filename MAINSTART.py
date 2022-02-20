@@ -120,12 +120,13 @@ if __name__ == "__main__":
 				if client.db.appconfig.find_one()['rebalance']:
 					available_funds = 0
 					rebalance_capital = 0
-					for ab in available_bots:
+					for a in available_bots:
+						ab = client.getBot(a)
 						available_funds += ab['cash']
 						rebalance_capital += ab['starting_capital']
-					for ab in available_bots:
-						client.updateBot(ab['botid'],'cash',available_funds/len(available_bots))
-						client.updateBot(ab['botid'],'rebalance_capital',rebalance_capital/len(available_bots))
+					for a in available_bots:
+						client.updateBot(a,'cash',available_funds/len(available_bots))
+						client.updateBot(a,'rebalance_capital',rebalance_capital/len(available_bots))
 
 				# get current trade assets
 				unavailable_trades = []
