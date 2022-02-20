@@ -3,13 +3,15 @@ Project that automates scalp trading of cryptocurrency ETFs on Kucoin (paper tra
 
 Required Packages:
 
-multiprocessing
-telegram_send
-requests
-pandas
-numpy
-certifi
-pymongo
+- multiprocessing
+- telegram_send
+- requests
+- pandas
+- numpy
+- certifi
+- pymongo
+- pandas_ta
+- tradingview-ta
 
 Once all packages have been installed:
 1) set up a mongo database and enter the credentials in the credentials.xml file
