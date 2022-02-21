@@ -169,6 +169,11 @@ if __name__ == "__main__":
 							print("Trade found. Launching {} on {}, target of {:.2f}% profit".format(short['short'],available_bots[-1],(target-1)*100))
 							p = Process(target=trade_main,args=(available_bots[-1],short['short'],target),daemon=True)
 							p.start()
+							wait = True
+							while wait:
+								status = client.getBot(available_bots[-1])['status']
+								if status == 'active':
+									wait = False
 							# processes.append(p)
 							available_bots.pop()
 							unavailable_trades.append(short['short'])
