@@ -69,7 +69,7 @@ def get_binance_data(asset,interval):
 	return df
 
 def get_kucoin_data(asset,interval,start=None,end=None):
-	url = f"https://api.kucoin.com/api/v1/market/candles?symbol={asset}&type={interval}"_binance
+	url = f"https://api.kucoin.com/api/v1/market/candles?symbol={asset}&type={interval}"
 	if start != None:
 		url += f"&startAt={start}"
 	if end != None:
