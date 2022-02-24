@@ -22,9 +22,9 @@ def check_incomplete_trades(client):
 	return open_trades
 
 def notify_trades(client,mode="long"):
-	query = client.db.etfs.find({"$and":[{"um_15m":{"$lte":10}}, {"um_4h":{"$lte":10}}]})
+	query = client.db.etfs.find({"$and":[{"um_15m":{"$lte":35}}, {"um_4h":{"$lte":10}}]})
 	if mode == "short":
-		query = client.db.etfs.find({"$and":[{"um_15m":{"$gte":90}}, {"um_4h":{"$gte":90}}]})
+		query = client.db.etfs.find({"$and":[{"um_15m":{"$gte":65}}, {"um_4h":{"$gte":90}}]})
 	# query = client.db.etfs.find({"$and":[{"um_15m":{"$lte":10}},{"$or":[{"um_4h":{"$lte":10}},{"bitcoin_pair_recc":{"$gt":0}}]},{"um_4h":{"$lt":70}}]})
 	# if mode == "short":
 	# 	query = client.db.etfs.find({"$and":[{"um_15m":{"$gte":90}},{"$or":[{"um_4h":{"$gte":90}},{"bitcoin_pair_recc":{"$lt":0}}]},{"um_4h":{"$gt":30}}]})
@@ -139,7 +139,8 @@ if __name__ == "__main__":
 
 				# query trades
 				if len(available_bots) > 0:
-					query_longs = client.db.etfs.find({"$and":[{"um_15m":{"$lte":10}},{"$or":[{"um_4h":{"$lte":10}},{"bitcoin_pair_recc":{"$gt":0}}]},{"um_4h":{"$lt":70}}]})
+					# query_longs = client.db.etfs.find({"$and":[{"um_15m":{"$lte":10}},{"$or":[{"um_4h":{"$lte":10}},{"bitcoin_pair_recc":{"$gt":0}}]},{"um_4h":{"$lt":70}}]})
+					query_longs = client.db.etfs.find({"$and":[{"$or":[{"$and":[{"um_15m":{"$lt":50}}, {"um_4h":{"$lte":10}}]},{"$and":[{"um_15m":{"$lte":10}},{"bitcoin_pair_recc":{"$gt":0}}]}]},{"um_4h":{"$lt":70}}]})
 					for long in query_longs:
 						if long['long'] not in unavailable_trades:
 							target = 1.022
@@ -160,7 +161,8 @@ if __name__ == "__main__":
 								break
 
 				if len(available_bots) > 0:
-					query_shorts = client.db.etfs.find({"$and":[{"um_15m":{"$gte":90}},{"$or":[{"um_4h":{"$gte":90}},{"bitcoin_pair_recc":{"$lt":0}}]},{"um_4h":{"$gt":30}}]})
+					# query_shorts = client.db.etfs.find({"$and":[{"um_15m":{"$gte":90}},{"$or":[{"um_4h":{"$gte":90}},{"bitcoin_pair_recc":{"$lt":0}}]},{"um_4h":{"$gt":30}}]})
+					query_shorts = client.db.etfs.find({"$and":[{"$or":[{"$and":[{"um_15m":{"$gt":50}}, {"um_4h":{"$gte":90}}]},{"$and":[{"um_15m":{"$gte":90}},{"bitcoin_pair_recc":{"$lt":0}}]}]},{"um_4h":{"$gt":30}}]})
 					for short in query_shorts:
 						if short['short'] not in unavailable_trades:
 							target = 1.022
