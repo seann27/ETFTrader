@@ -126,7 +126,7 @@ def get_upside_momemtum(df,suffix='',return_df=False):
 	df[f'upside_momemtum{suffix}'] = df[f'trendline{suffix}'] + (df[f'trendstrength{suffix}']/df[f'trendline2{suffix}']) + df[f'trendstrength{suffix}']
 
 	upside_momemtum = df.iloc[-1][f'upside_momemtum{suffix}']
-	if upside_momemtum == float('-inf'):
+	if upside_momemtum == float('-inf') or upside_momemtum == float('inf'):
 		upside_momemtum = np.nan
 
 	# if np.isnan(upside_momemtum):
